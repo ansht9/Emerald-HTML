@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald - Escrow Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Emerald</h2>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="contracts.html">Contracts</a></li>
+                    <li><a href="escrow.html" class="active">Escrow Management</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="eheader">
+                <button class="user-btn">Logged in as XYZ NGO</button>
+                <button class="user-btn">Wallet Connected</button>
+                <h1>Escrow Management</h1>
+                
+
+            </header>
+            <!-- <button class="user-btn">Logged in as XYZ NGO</button> -->
+            <section class="escrow-management">
+                <div class="escrow-balance">
+                    <h3>Current Escrow Balance</h3>
+                    <p>$100</p>
+                </div>
+                <div class="add-funds">
+                    <h3>Add Funds to Escrow</h3>
+                    <input type="number" placeholder="Enter amount" />
+                    <button class="add-funds-btn">Add Funds</button>
+                </div>
+                <div class="upload-contract">
+                    <h3>Upload Contract</h3>
+                    <input type="file" id="file-upload" name="contract">
+                    <label for="file-upload" class="file-label">Choose a file</label>
+                    <button class="upload-btn">Upload</button>
+                </div>
+            </section>
+        </main>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    
+        <!-- Pop-up Modal -->
+        <div id="modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <p>Contract deployed successfully!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+document.querySelector('.upload-btn').addEventListener('click', function() {
+    let progressBarContainer = document.querySelector('.progress-bar-container');
+    let progressBar = document.getElementById('progressBar');
+    progressBarContainer.style.display = 'block'; // Show progress bar container
+    let width = 0;
+    let interval = setInterval(function() {
+        let randomIncrement = Math.floor(Math.random() * 10 + 1); // Random increment between 1 and 10
+        width += randomIncrement;
+        if (width >= 100) {
+            width = 100; // Ensure it does not exceed 100%
+            progressBar.style.width = width + '%';
+            clearInterval(interval);
+            progressBarContainer.style.display = 'none'; // Hide progress bar
+            document.getElementById('modal').style.display = 'block'; // Show modal after progress completes
+
+            // Update escrow balance
+            document.querySelector('.escrow-balance p').textContent = '$110';
+
+            // Store transaction details in localStorage
+            const transaction = {
+                id: '005',
+                description: 'Well For All initiated Contract #16',
+                date: '08/18/2024'
+            };
+            localStorage.setItem('newTransaction', JSON.stringify(transaction));
+        } else {
+            progressBar.style.width = width + '%'; // Update progress bar width
+        }
+    }, Math.random() * 200 + 100); // Random time between 100ms and 300ms
+});
+
+
+
+
+document.querySelector('.close-btn').addEventListener('click', function() {
+    document.getElementById('modal').style.display = 'none';
+});
+
+window.onclick = function(event) {
+    let modal = document.getElementById('modal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+
+
+
+    </script>
+</body>
+</html>

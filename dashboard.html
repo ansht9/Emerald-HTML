@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Emerald</h2>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="contracts.html">Contracts</a></li>
+                    <li><a href="escrow.html">Escrow Management</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <h1>Dashboard</h1>
+            </header>
+            <section class="overview">
+                <div class="overview-card">
+                    <h3>Total Contracts</h3>
+                    <p>15</p>
+                </div>
+                <div class="overview-card">
+                    <h3>Total Funds in Escrow</h3>
+                    <p id="escrow-funds">$100</p>
+                </div>
+                <div class="overview-card">
+                    <h3>Participating Companies</h3>
+                    <p>10</p>
+                </div>
+                <div class="overview-card">
+                    <h3>Carbon Footprint Reduced</h3>
+                    <p>120 Tons</p>
+                </div>
+            </section>
+            <section class="recent-activity">
+                <h2>Recent Activity</h2>
+                <ul>
+                    <li>RenewCo accepted Contract #13</li>
+                    <li>EcoFund added $9 to Escrow for project #12</li>
+                    <li>GreenTech Solutions met the conditions of Contract #11</li>
+                    <li>City Council of Springfield initiated Contract #9</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Check local storage for updated escrow balance and update if necessary
+        document.addEventListener('DOMContentLoaded', function() {
+            let storedEscrowBalance = localStorage.getItem('escrowBalance');
+            if (storedEscrowBalance) {
+                document.getElementById('escrow-funds').textContent = storedEscrowBalance;
+            }
+        });
+    </script>
+</body>
+</html>
